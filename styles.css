@@ -1,0 +1,581 @@
+body{
+    background-color: #CCC;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;    
+    overflow: hidden;
+    padding: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+#modal input[type="text"],
+#modal input[type="date"],
+#modal input[type="number"],
+#modal input[type="password"],
+#modal select,
+.conteudo > .busca > .in{
+    background-color: #FFF;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    font-size: 16px;
+}
+input, button, select{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+button{
+    color: #FFF;
+}
+textarea:focus, select:focus, input:focus{
+    outline: none;
+}
+::placeholder {
+    color: #C0C0C0;
+}
+
+/*  Some com o spinner do input type number no chrome e firefox */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/*  Links  */
+a{
+    color: #067AC3;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.link{
+    color: #067AC3;
+}
+.link_bg{
+    background-color: #067AC3;
+}
+
+.centro{
+    background-color: #FFF;
+    bottom: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    left: 40px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.conteudo{
+    background-color: #FFF;
+    display: flex;    
+    flex: 0 0 60%;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/*  Rodapé  */
+.conteudo > .bottom{
+    align-items: center;
+    background-color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    flex: 0 0 40px;
+    margin-top: 20px;
+}
+.conteudo > .bottom .add_start{
+    color: #FFF;
+    cursor: pointer;
+    font-size: 80%;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px 0 10px;
+}
+.conteudo > .bottom .limit select{
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    margin: 0 5px 0 5px;
+    padding: 5px;
+}
+.conteudo > .bottom .limit span{
+    color: #666;
+    font-size: 80%;
+}
+
+/*  Busca  */
+.conteudo > .busca{
+    background-color: #FFF;
+    display: flex;
+    flex: 0 0 50px;
+    width: 100%;
+}
+.conteudo > .busca > .in{
+    border-right: 0;
+    display: flex;
+    flex: 1 1 auto;
+}
+.conteudo > .busca > .in .busca_reset{
+    cursor: pointer;
+    flex: 0 0 80px;
+    font-size: 90%;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+}
+.conteudo > .busca > .in input{
+    background-color: transparent;
+    border: 0;
+    flex: 1 1 auto;
+    font-size: 20px;
+    padding: 0;
+    text-indent: 15px;
+}
+.conteudo > .busca > button{
+    border: 0;
+    cursor: pointer;
+    flex: 0 0 50px;
+    font-size: 20px;
+    padding: 0;
+}
+
+/*  Tabela  */
+.conteudo > .tabela{
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
+.conteudo > .tabela > table{
+    border-collapse: collapse;
+    width: 98%;
+}
+.conteudo > .tabela > table tbody tr{
+    border-bottom: 1px solid #E0E0E0;
+}
+.conteudo > .tabela > table tbody td{
+    padding: 10px 0 10px;
+}
+.conteudo > .tabela > table tbody td:last-child{
+    vertical-align: middle;
+    text-align: right;
+}
+.conteudo > .tabela > table tbody td:last-child i{
+    color: #CCC;
+    cursor: pointer;
+    float: right;
+    font-size: 17px;
+}
+.conteudo > .tabela > table tbody td:last-child .del{
+    margin-left: 8px;
+}
+.conteudo > .tabela > table tbody td:last-child .del:hover{
+    color: #CC0000;
+}
+.conteudo > .tabela > table tbody td:last-child .edit{
+    margin-left: 11px;
+}
+.conteudo > .tabela > table tbody td:last-child .action:hover{
+    color: #067AC3;
+}
+.conteudo > .tabela > table thead{
+    background-color: #FFF;
+}
+.conteudo > .tabela > table thead th{
+    background-color: #FFF;
+    cursor: pointer;
+    height: 50px;
+    position: sticky;
+    vertical-align: middle;
+    top: 0;
+}
+.conteudo > .tabela > table thead th:after{
+    content:'';
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.conteudo > .tabela > table thead th span{
+    float: left;
+}
+.conteudo > .tabela > table thead th i{
+    float: left;
+    margin-left: 3px;
+}
+.conteudo > .tabela > table thead .off{
+    color: #CCC;
+}
+.conteudo > .tabela > table thead .on{
+    color: #333;
+}
+
+/*  Mensagem de erro  */
+#erro{
+    align-items: center;
+    background-color: #CC0000;
+    color: #FFF;
+    display: flex;
+    left: 100px;
+    padding: 20px;
+    opacity: 0;
+    position: absolute;
+    top: 100px;
+    transition: visibility 0s, opacity 0.5s linear;
+    visibility: hidden;
+    z-index: 30;
+}
+#erro > i{
+    font-size: 30px;
+}
+#erro > #erro_c{
+    background-color: #FFF;    
+    color: #CC0000;    
+    cursor: pointer;
+    font-size: 80%;
+    margin-left: 10px;
+    padding: 5px;
+}
+#erro > #erro_t{
+    font-size: 110%;
+    margin-left: 10px;
+}
+
+/*  Mapa  */
+#mapa{
+    background-color: #FFF;
+    flex: 0 0 40%;
+}
+
+/*  Janela modal  */
+#modal{
+    background-color: #FFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+    left: 50%;
+    margin-left: -250px;
+    min-height: 240px;
+    opacity: 0;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    transition: visibility 0s, opacity 0.5s linear;
+    visibility: hidden;
+    z-index: 20;
+    width: 500px;
+}
+#modal > p.desc{
+    color: #666;
+    font-size: 95%;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+#modal > p.desc > span{
+    color: #333;
+    font-style: italic;
+}
+#modal > p.tit{
+    color: #333;
+    font-size: 135%;
+    margin: 0;
+    padding: 0;
+}
+#modal > .delete{
+    list-style: none;
+    margin: 30px;
+    padding: 0;
+}
+#modal > .delete li:first-child{
+    color: #666;
+    font-size: 100%;
+}
+#modal > .delete li:first-child span{
+    font-weight: bold;
+}
+#modal > .delete li:last-child{
+    color: #999;
+    font-size: 100%;
+    margin-top: 2px;
+}
+#modal > #modal_over{
+    align-items: center;
+    background-color: rgba(255, 255, 255, 1);
+    bottom: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#modal > #modal_over > *{
+    display: none;
+}
+#modal > #modal_over .botao{
+    color: #FFF;
+    cursor: pointer;
+    font-size: 90%;
+    font-weight: bold;
+    margin-top: 40px;
+    padding: 10px;
+}
+#modal > #modal_over .ico_erro{
+    color: #CC0000;
+}
+#modal > #modal_over .ico_ok{
+    color: #008000;
+}
+#modal > #modal_over .msg_01{
+    color: #333;
+    font-size: 120%;
+    margin-top: 20px;
+    text-align: center;
+}
+#modal > #modal_over .msg_02{
+    color: #999;    
+    font-size: 90%;
+    text-align: center;
+}
+#modal > .row{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+#modal > .row > .item > input, #modal > .row > .item > select{
+    display: block;
+    margin-top: 2px;
+    padding: 7px;
+    width: 100%;
+}
+#modal > .row > .item > select{
+    height: 32px;
+}
+#modal > .row > .item > label{
+    color: #333;
+    display: block;
+    font-size: 90%;
+    font-weight: bold;
+}
+#modal > .row > .item_bairro{
+    flex: 0 0 60%;
+}
+#modal > .row > .item_cep > input{
+    float: left;
+}
+#modal > .row > .item_cep > span{
+    float: left;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 2px 5px 0 5px;
+}
+#modal > .row > .item_cep > #cep_01{
+    width: 60px;
+}
+#modal > .row > .item_cep > #cep_02{
+    width: 40px;
+}
+#modal > .row > .item_cep > .cep_check{
+    cursor: pointer;
+    float: left;
+    font-size: 90%;
+    margin: 10px 0 0 10px;
+}
+#modal > .row > .item_cep > #cep_check_load{
+    color: #666;
+    display: none;
+    float: left;
+    font-size: 90%;
+    margin: 10px 0 0 10px;   
+}
+@keyframes blink {
+    50% { color: transparent }
+}
+#modal > .row > .item_cep > #cep_check_load span{
+    animation: 1s blink infinite
+}
+#modal > .row > .item_cep > #cep_check_load span:nth-child(2) {
+    animation-delay: 250ms
+}
+#modal > .row > .item_cep > #cep_check_load span:last-child {
+    animation-delay: 500ms
+}
+#modal > .row > .item_cidade{
+    flex: 0 0 78%;
+}
+#modal > .row > .item_complemento{
+    flex: 0 0 38%;
+}
+#modal > .row > .item_endereco{
+    flex: 0 0 75%;
+}
+#modal > .row > .item_host, #modal > .row > .item_db{
+    flex: 0 0 39%;
+}
+#modal > .row > .item_dob{
+    flex: 0 0 30%;
+}
+#modal > .row > .item_cep, #modal > .row > .item_nome{
+    flex: 0 0 100%;
+}
+#modal > .row > .item_pass, #modal > .row > .item_user{
+    flex: 0 0 49%;
+}
+#modal > .row > .item_numero{
+    flex: 0 0 23%;
+}
+#modal > .row > .item_port{
+    flex: 0 0 20%;
+}
+#modal > .row > .item_sexo{
+    flex: 0 0 63%;
+}
+#modal > .row > .item_sexo .sexo{
+    align-items: center;
+    display: flex;
+    margin-top: 8px;
+}
+#modal > .row > .item_sexo .sexo label{
+    font-size: 80%;
+}
+#modal > .row > .item_sexo .sexo #sexo_m{
+    margin-left: 10px;
+}
+#modal > .row > .item_uf{
+    flex: 0 0 20%;
+}
+#modal > .submit{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+#modal > .submit > button{
+    border: 0;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+}
+#modal > .submit > .button_del{
+    background-color: #CC0000;
+}
+#modal .tit_f{
+    align-items: center;
+    display: flex;
+    height: 35px;
+}
+#modal .tit_f .close{
+    flex: 0 0 60px;
+}
+#modal .tit_f .close i{
+    cursor: pointer;
+    font-size: 20px;
+}
+#modal .tit_f .emp{
+    flex: 0 0 60px;
+}
+#modal .tit_f span{
+    color: #333;
+    font-size: 135%;
+    flex: 1 1 auto;
+    text-align: center;
+}
+#modal .tit_f button{
+    border: 0;
+    color: #FFF;
+    cursor: pointer;
+    font-size: 90%;
+    font-weight: bold;
+    height: 35px;
+    flex: 0 0 60px;
+}
+
+#overflow{
+    background-color: rgba(255, 255, 255, 0.8);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+/*  Tooltip mapa  */
+.tooltip{
+
+}
+.tooltip p{
+    margin: 0;
+    padding: 0;
+}
+.tooltip p:first-child{
+    color: #333;
+    font-size: 16px;
+    line-height: 16px;
+}
+.tooltip p:nth-child(2){
+    color: #999;
+    font-size: 13px;
+    line-height: 13px;
+    margin-top: 2px;
+}
+.tooltip p:last-child{
+    margin-top: 10px;
+}
+.tooltip p:last-child i{
+    color: #CCC;
+    cursor: pointer;
+    font-size: 17px;
+}
+.tooltip p:last-child .del{
+    margin-left: 5px;
+}
+.tooltip p:last-child .del:hover{
+    color: #CC0000;
+}
+.tooltip p:last-child .edit:hover{
+    color: #067AC3;
+}
+
+/*  Media query  */
+@media all and (max-height: 768px), all and (max-width: 960px){
+
+    #erro{
+        left: 0;
+        padding: 10px;
+        right: 0;
+        top: 0;
+    }
+    #mapa{
+	display: none;
+    }
+    #modal{
+        margin-left: -160px;
+        width: 320px;
+    }
+    .centro{
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+    }
+    .conteudo{
+	flex: 1 1 100%;
+    }
+    .conteudo > .bottom{
+        justify-content: center;
+    }
+    .hidemob{
+        display: none;
+    }
+    
+}

@@ -1,0 +1,48 @@
+<form id="modal" method="post" action="setup.php" autocomplete="off">
+
+    <p class="tit">Setup Inicial</p>
+    <p class="desc">Informe abaixo os dados de conexão ao servidor MySQL.
+        O banco de dados será criado, caso não exista, e uma tabela será adicionada,
+        caso não exista, e populada com dados de teste: <span>cl_dados</span>.</p>
+
+    <div class="row">
+        <div class="item item_host">
+            <label for="host">Host</label>
+            <input type="text" name="host" id="host" value="localhost" required />
+        </div>
+        <div class="item item_port">
+            <label for="port">Port</label>
+            <input type="number" name="port" id="port" value="3306" required pattern="\d+" />
+        </div>
+        <div class="item item_db">
+            <label for="db">DB</label>
+            <input type="text" name="db" id="db" required />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="item item_user">
+            <label for="user">User</label>
+            <input type="text" name="user" id="user" required />
+        </div>
+        <div class="item item_pass">
+            <label for="pass">Password</label>
+            <input type="password" name="pass" id="pass" required />
+        </div>
+    </div>
+
+    <div class="submit">
+        <button type="submit" class="link_bg">Gravar Configuração</button>
+    </div>
+
+    <div id="modal_over">
+        <i class="fas fa-cog fa-spin fa-5x link ico_spin"></i>
+        <i class="fas fa-check fa-5x ico_ok"></i>
+        <i class="fas fa-exclamation-triangle fa-5x ico_erro"></i>
+        <span class="msg_01"></span>
+        <span class="msg_02"></span>
+        <span class="botao link_bg">Fechar</span>
+    </div>
+    
+</form>

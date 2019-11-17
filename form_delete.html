@@ -1,0 +1,30 @@
+<form id="modal" method="post" action="dados.php" autocomplete="off">
+
+    <input type="hidden" name="acao" value="delete" />
+    <input type="hidden" name="id" id="delete_id" value="" />
+    
+    <div class="tit_f">
+        <div class="close"><i class="fas fa-times link modal_close" title="Fechar"></i></div>
+        <span>Remover Registro</span>
+        <div class="emp"></div>
+    </div>
+
+    <ul class="delete">
+        <li>Você tem certeza que deseja remover o registro n&ordm; <span id="delete_id_f"></span> do banco de dados?</li>
+        <li>Essa ação é irreversível</li>
+    </ul>
+
+    <div class="submit">
+        <button type="submit" class="button_del">Remover Registro</button>
+    </div>
+
+    <div id="modal_over">
+        <i class="fas fa-cog fa-spin fa-5x link ico_spin"></i>
+        <i class="fas fa-check fa-5x ico_ok"></i>
+        <i class="fas fa-exclamation-triangle fa-5x ico_erro"></i>
+        <span class="msg_01"></span>
+        <span class="msg_02"></span>
+        <span class="botao link_bg">Fechar</span>
+    </div>
+
+</form>

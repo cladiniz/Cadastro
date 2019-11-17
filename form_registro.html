@@ -1,0 +1,118 @@
+<form id="modal" method="post" action="dados.php" autocomplete="off">
+
+    <input type="hidden" name="acao" value="add_edit" />
+    <input type="hidden" name="tipo" value="%tipo%" />
+    <input type="hidden" name="id" value="%id%" />
+    
+    <div class="tit_f">
+        <div class="close"><i class="fas fa-times link modal_close" title="Fechar"></i></div>
+        <span>%titulo%</span>
+        <button type="submit" class="save_topo link_bg" title="Salvar os Dados">Salvar</button>
+    </div>
+
+    <div class="row">
+        <div class="item item_nome">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" value="%nome%" required />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="item item_dob">
+            <label for="nome">Nascimento</label>
+            <input type="date" name="dob" id="dob" min="1901-01-01" max="2019-11-16" value="%dob%" required />
+        </div>
+        <div class="item item_sexo">
+            <label for="nome">Sexo</label>
+            <div class="sexo">
+                <input type="radio" name="sexo" id="sexo_f" value="f" required />
+                <label for="sexo_f">Feminino</label>
+                <input type="radio" name="sexo" id="sexo_m" value="m" />
+                <label for="sexo_m">Masculino</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="item item_cep">
+            <label for="cep_01">CEP</label>
+            <input type="text" class="cep_num" name="cep_01" id="cep_01" pattern="\d{5}" value="%cep_01%" maxlength="5" />
+            <span>-</span>
+            <input type="text" class="cep_num" name="cep_02" id="cep_02" pattern="\d{3}" value="%cep_02%" maxlength="3" />
+            <div class="cep_check link">Conferir</div>
+            <div id="cep_check_load">Carregando <span>.</span><span>.</span><span>.</span></div>            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="item item_endereco">
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco" id="endereco" maxlength="50" value="%endereco%" />
+        </div>
+        <div class="item item_numero">
+            <label for="numero">Número</label>
+            <input type="number" name="numero" id="numero" maxlength="5" value="%numero%" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="item item_complemento">
+            <label for="complemento">Complemento</label>
+            <input type="text" name="complemento" id="complemento" maxlength="30" value="%complemento%" />
+        </div>
+        <div class="item item_bairro">
+            <label for="bairro">Bairro</label>
+            <input type="text" name="bairro" id="bairro" maxlength="30" value="%bairro%" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="item item_cidade">
+            <label for="cidade">Cidade</label>
+            <input type="text" name="cidade" id="cidade" maxlength="30" value="%cidade%" />
+        </div>
+        <div class="item item_uf">
+            <label for="uf">UF</label>
+            <select name="uf" id="uf">
+                <option value=""></option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="modal_over">
+        <i class="fas fa-cog fa-spin fa-5x link ico_spin"></i>
+        <i class="fas fa-check fa-5x ico_ok"></i>
+        <i class="fas fa-exclamation-triangle fa-5x ico_erro"></i>
+        <span class="msg_01"></span>
+        <span class="msg_02"></span>
+        <span class="botao link_bg">Fechar</span>
+    </div>
+
+</form>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="iso-8859-1">
+        <title>Cadastro de Clientes</title>
+        <meta name="author" content="Claudio Diniz">
+        <meta name="description" content="Processo Seletivo BS2 - Claudio Diniz">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+	<link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="centro">
+            <div id="mapa"></div>
+            <div class="conteudo">
+                <form class="busca" id="busca" method="post" autocomplete="off">
+                    <div class="in">
+                        <input type="text" id="busca_q" name="q" placeholder="Buscar por id, nome, cidade ..." />
+                        <div class="busca_reset hidemob link">limpar</div>
+                    </div>
+                    <button type="submit" class="link_bg"><i class="fas fa-search"></i></button>
+                </form>
+		<div class="tabela" id="tabela_scroll">
+		    <table height="200">
+		        <thead>
+		            <tr id="header">
+			        <th data-tipo="id" class="on"><span>ID</span><i class="fas fa-caret-down"></i></th>
+				<th data-tipo="nome" class="off"><span>Nome</span><i class="fas fa-caret-down"></i></th>
+				<th data-tipo="cidade" class="off hidemob"><span>Cidade</span><i class="fas fa-caret-down"></i></th>
+				<th data-tipo="uf" class="off hidemob"><span>UF</span><i class="fas fa-caret-down"></i></th>
+                                <th></th>
+			    </tr>
+			</thead>
+			<tbody id="tabela"></tbody>
+	            </table>
+		</div>
+                <div class="bottom">
+                    <div class="limit hidemob">
+                        <span>Mostrar</span>
+                        <select id="limit">
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span>registros por página</span>
+                    </div>
+                    <div class="add_start link_bg">ADICIONAR NOVO REGISTRO</div>                    
+                </div>
+            </div>
+        </div>
+        <div id="overflow"></div>
+        <div id="erro">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="erro_t"></span>
+            <span id="erro_c">Fechar</span>    
+        </div>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
