@@ -28,41 +28,6 @@ class Setup{
 
 	}
 
-	function csv_parse(){
-
-		$this -> db = new DB();
-		$csv = array_map('str_getcsv', file('nomes.csv'));
-		$this -> db -> prepare('INSERT INTO teste.cl_dados(nome, sexo, dob, cep, endereco, numero, cidade, uf, email, lat, lon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
-		foreach ($csv as $f){
-
-			$data = explode('/', $f[10]);
-			$end = explode(' ', $f[5]);
-			$num = array_pop($end);
-			$rua = implode(' ', $end);
-			
-			$d = array(				
-				sprintf('%s %s. %s', trim($f[1]), trim($f[4]), trim($f[2])),
-				$f[0][0],
-				sprintf('%04d-%02d-%02d', $data[2], $data[0], $data[1]),
-				$f[8],
-				$rua,
-				is_numeric($num) ? $num : 0,
-				$f[6],
-				strtoupper($f[7]),
-				strtolower($f[9]),
-				$f[11],
-				$f[12]				
-			);
-
-			if (!$this -> db -> execute($d)){
-				print_r ($this -> db -> error_data);
-			}
-
-		}
-
-	}
-
 	//  Testa dados POST, confere a conexão e aonde o config pode ser salvo
 	private function config_save(){
 
