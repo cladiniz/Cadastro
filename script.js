@@ -3,21 +3,26 @@
 
 class Clientes{
 
+    latlon = null;
     limit = 30;
     mais = true;
     offset = 0;
     order = ['id', 'DESC'];
 
-    //  Mapbox
+    //  Setar markers para os registros que estão na tela?
+    mb_marker_set = false;
+    
+    //  Mapbox    
     mb_token = 'pk.eyJ1IjoiYml0ZWxvMTAiLCJhIjoiY2syeGQyNXZuMGFibDNvbGNuNDRoNG4yaCJ9.UpbuMafjZJFJqid9Mems9Q';
     mb_bounds = new mapboxgl.LngLatBounds(
         new mapboxgl.LngLat(-76.26115309683203, -37.55414913949015),
         new mapboxgl.LngLat(-31.62374064303117, 11.803114085670657)
     );
     mb_zoom = 3.53;
-
         
     constructor(){
+
+        //localStorage.removeItem('latlon');
 
         //  Confere se order e limit estão em localstorage        
         ['order', 'limit'].forEach(function(e){
@@ -27,10 +32,14 @@ class Clientes{
             
         }.bind(this));
 
+        //  Confere se latlon está no localstorage
+        let latlon = localStorage.getItem('latlon');
+        this.latlon = latlon ? JSON.parse(latlon) : null;
+        
         //  Limit no select
         document.getElementById('limit').value = this.limit;
-        
-	//  Seta o header, inicia mapbox, faz a query inicial e seta os eventos
+
+	//  Seta o header, inicia mapbox, faz a query inicial, e seta os eventos
 	this.header_set();
         this.mb_start();
         this.query();
@@ -202,9 +211,86 @@ class Clientes{
                 this.add_edit_start(e);
             }else if (cl.contains('cep_check')){
                 this.cep_check();
+            }else if (cl.contains('geocode_start')){
+                this.geocode_start(e);
             }
             
         }.bind(this));
+        
+    }
+
+    //  Executa geocode em lat, lon
+    geocode_route_set(lat, lon){
+
+        if (this.mb_tooltip_on) this.mb_tooltip_on.remove();
+        
+        this.mb_route_src = new MapboxDirections({
+            accessToken: mapboxgl.accessToken,
+            controls: {inputs: false},
+            interactive: false, 
+            language: 'pt', 
+            unit: 'metric',
+            profile: 'mapbox/driving'
+        });
+
+        this.mb_src.addControl(this.mb_route_src, 'top-left');
+        this.mb_route_src.setOrigin([this.latlon[1], this.latlon[0]]);
+        this.mb_route_src.setDestination([lon, lat]);
+
+    }
+
+    //  Salva dados do geocode
+    geocode_save(){
+        
+        let latlon = this.mb_geo_src.getCenter();
+        
+        if (latlon.lat != this.mg_geo_latlon.lat || latlon.lng != this.mg_geo_latlon.lng){
+            
+            this.latlon = [latlon.lat, latlon.lng];
+            localStorage.setItem('latlon', JSON.stringify(this.latlon));
+
+            let icos = document.querySelectorAll('#tabela tr td:last-child .route');
+
+            for (let x = 0, l = icos.length; x < l; x++){                
+                icos[x].classList.remove('route_off');
+                icos[x].classList.add('route_on');                
+            }
+            
+        }
+
+        this.modal_close();
+        
+    }
+
+    //  Mostra a janela e seta o local do geocode
+    geocode_start(e){
+
+        e.preventDefault();
+        
+        this.get('geocode_set.html', function(html){
+            
+            document.body.insertAdjacentHTML('beforeend', html);
+            this.modal_show();
+
+            this.mb_geo_src = new mapboxgl.Map({
+                bounds: this.mb_bounds,
+                dragRotate: false, 
+                maxBounds: this.mb_bounds, 
+                container: 'mapa_geo',
+                style: 'mapbox://styles/mapbox/streets-v10',
+                zoom: this.mb_zoom
+            });
+
+            this.mg_geo_latlon = this.mb_geo_src.getCenter();
+
+            this.mb_geo_src.addControl(new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            }));
+
+            document.getElementById('geocode_save').addEventListener('click', this.geocode_save.bind(this));
+            
+        }.bind(this), 'text');          
         
     }
 
@@ -313,6 +399,7 @@ class Clientes{
 
         this.mb_flying = false;
         this.mb_markers = [];
+        this.mb_route_src = false;
         this.mb_tooltip_on = false;
         this.mb_tooltip_html = '';
         
@@ -326,6 +413,10 @@ class Clientes{
             style: 'mapbox://styles/mapbox/streets-v10',
             zoom: this.mb_zoom
         });
+
+        //  Language
+        var language = new MapboxLanguage();
+        this.mb_src.addControl(language);
 
         //  Actions do flying
         this.mb_src.on('flyend', function(){
@@ -533,7 +624,10 @@ class Clientes{
 
         this.mais = true;
         this.offset = 0;
+
         if (this.mb_tooltip_on) this.mb_tooltip_on.remove();
+        if (this.mb_route_src) this.mb_route_src.removeRoutes();
+        
         this.mb_src.fitBounds(this.mb_bounds);
         this.mb_src.setZoom(this.mb_zoom);
         
@@ -567,6 +661,7 @@ class Clientes{
         if (e.target.classList.contains('map') && !this.mb_flying){
 
             if (this.mb_tooltip_on) this.mb_tooltip_on.remove();
+            if (this.mb_route_src) this.mb_route_src.removeRoutes();
             
             let tds = tr.querySelectorAll('td'),
                 nome = tds[1].innerText,
@@ -584,9 +679,14 @@ class Clientes{
         //  Edit    
         }else if (e.target.classList.contains('edit')){
             this.add_edit_start(id);
+            
         //  Delete    
         }else if (e.target.classList.contains('del')){
-            this.delete_start(id);            
+            this.delete_start(id);
+            
+        //  Seta Rota    
+        }else if (e.target.classList.contains('set_route')){
+            this.geocode_route_set(latlon[0], latlon[1]);            
         }
 
         
@@ -600,7 +700,7 @@ class Clientes{
             ico = [
                 '<i class="ico_acao fas fa-minus-circle del" title="Remover registro"></i>',
 	        '<i class="ico_acao fas fa-edit edit action" title="Editar registro"></i>',
-		'<i class="ico_acao fas fa-map-marker-alt action map hidemob" title="Localizar e ampliar no mapa"></i>'
+		'<i class="ico_acao fas fa-map-marker-alt action map hidemob" title="Localizar e ampliar no mapa"></i>'                
             ];
 
         for (let x = 0; x < data_l; x++){
@@ -608,15 +708,27 @@ class Clientes{
             let item = data[x], 
                 lat_ico = (item.lat == 0 || item.lon == 0) ? '' : ico[2];
 
+            //  Ico da rota
+            if (item.lat == 0 || item.lon == 0){
+                var route_ico = '';
+            }else{
+                var display = this.latlon ? 'route_on' : 'route_off',
+                    route_ico = `<i class="ico_acao fas fa-route action route ${display} set_route hidemob" title="Traçar a Rota"></i>`;
+            }
+
             html += `<tr data-id="${item.id}" data-latlon="${item.lat} ${item.lon}">
                          <td>#${item.id}</td><td>${item.nome}</td><td class="hidemob">${item.cidade}</td>
                          <td class="hidemob">${item.uf}</td>
-			 <td>${ico[0]}${ico[1]}${lat_ico}</td>
+			 <td>${ico[0]}${ico[1]}${route_ico}${lat_ico}</td>
 	             </tr>`;
 
-            let marker = new mapboxgl.Marker();
-            marker.setLngLat([item['lon'], item['lat']]).addTo(this.mb_src);
-            this.mb_markers.push(marker);
+            if (this.mb_marker_set){
+            
+                let marker = new mapboxgl.Marker();
+                marker.setLngLat([item['lon'], item['lat']]).addTo(this.mb_src);
+                this.mb_markers.push(marker);
+
+            }
             
         }
         

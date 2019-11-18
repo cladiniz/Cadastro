@@ -9,11 +9,11 @@ body{
 *{
     box-sizing: border-box;
 }
-#modal input[type="text"],
-#modal input[type="date"],
-#modal input[type="number"],
-#modal input[type="password"],
-#modal select,
+#modal .row input[type="text"],
+#modal .row input[type="date"],
+#modal .row input[type="number"],
+#modal .row input[type="password"],
+#modal .row select,
 .conteudo > .busca > .in{
     background-color: #FFF;
     border: 1px solid transparent;
@@ -96,13 +96,31 @@ a:hover{
     line-height: 40px;
     padding: 0 10px 0 10px;
 }
-.conteudo > .bottom .limit select{
+.conteudo > .bottom .limit{
+    display: flex;
+    align-items: center;
+}
+.conteudo > .bottom .limit > .geocode{
+    cursor: pointer;
+}
+.conteudo > .bottom .limit > .geocode span{
+    font-size: 80%;
+    margin-left: 5px;
+}
+.conteudo > .bottom .limit > .divi{
+    background-color: #CCC;
+    display: inline-block;
+    height: 30px;
+    margin: 0 10px 0 10px;
+    width: 1px;
+}
+.conteudo > .bottom .limit > select{
     background-color: #FFF;
     border: 1px solid #CCC;
     margin: 0 5px 0 5px;
     padding: 5px;
 }
-.conteudo > .bottom .limit span{
+.conteudo > .bottom .limit > span{
     color: #666;
     font-size: 80%;
 }
@@ -181,6 +199,15 @@ a:hover{
 }
 .conteudo > .tabela > table tbody td:last-child .action:hover{
     color: #067AC3;
+}
+.conteudo > .tabela > table tbody td:last-child .route{
+    margin-left: 8px;
+}
+.conteudo > .tabela > table tbody td:last-child .route_on{
+    display: inline;
+}
+.conteudo > .tabela > table tbody td:last-child .route_off{
+    display: none;
 }
 .conteudo > .tabela > table thead{
     background-color: #FFF;
@@ -314,6 +341,16 @@ a:hover{
     position: absolute;
     right: 0;
     top: 0;
+}
+#modal > #mapa_geo{
+    height: 350px;
+    margin-top: 20px;
+    width: 100%;
+}
+#modal > .mapa_info{
+    color: #666;
+    font-size: 90%;
+    margin-top: 20px;
 }
 #modal > #modal_over > *{
     display: none;
@@ -573,6 +610,9 @@ a:hover{
     }
     .conteudo > .bottom{
         justify-content: center;
+    }
+    .conteudo > .bottom .limit.hidemob{
+        display: none;
     }
     .hidemob{
         display: none;

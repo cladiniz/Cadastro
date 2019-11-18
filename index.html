@@ -7,8 +7,10 @@
         <meta name="description" content="Processo Seletivo BS2 - Claudio Diniz">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-        <link href="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css" rel="stylesheet" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css" rel="stylesheet" type="text/css" />
 	<link href="styles.css" rel="stylesheet">
     </head>
     <body>
@@ -46,6 +48,11 @@
                             <option value="50">50</option>
                         </select>
                         <span>registros por página</span>
+                        <div class="divi"></div>
+                        <div class="geocode geocode_start link">
+                            <i class="fas fa-route geocode_start"></i>
+                            <span class="geocode_start">Configurar Local</span>
+                        </div>
                     </div>
                     <div class="add_start link_bg">ADICIONAR NOVO REGISTRO</div>                    
                 </div>
@@ -57,7 +64,10 @@
             <span id="erro_t"></span>
             <span id="erro_c">Fechar</span>    
         </div>
-        <script src="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

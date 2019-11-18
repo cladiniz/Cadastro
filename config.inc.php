@@ -1,3 +1,7 @@
-<?php
-$config_db = ['host' => NULL, 'port' => NULL, 'db' => NULL, 'user' => NULL, 'pass' => NULL];
-?>
+<?php $config_db = array (
+  'host' => 'localhost',
+  'port' => '3306',
+  'db' => 'teste',
+  'user' => 'root',
+  'pass' => 'root',
+); ?>
