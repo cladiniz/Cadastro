@@ -63,8 +63,9 @@ class Setup{
 
 							$msg_02 = 'ATENÇÃO: O arquivo config.inc.php não tem permissão de escrita. ';
 							$msg_02 .= 'Os dados de configuração foram salvos na sessão e serão perdidos ';
-							$msg_02 .= 'ao fim da mesma.';
-							$_SESION['config_db'] = $this -> db -> config;
+							$msg_02 .= 'ao fim da mesma.';							
+							$this -> ret['msg_02'] = $msg_02;
+							$_SESSION['config_db'] = $this -> db -> config;
 							
 						}
 

@@ -22,8 +22,6 @@ class Clientes{
         
     constructor(){
 
-        //localStorage.removeItem('latlon');
-
         //  Confere se order e limit estão em localstorage        
         ['order', 'limit'].forEach(function(e){
             
